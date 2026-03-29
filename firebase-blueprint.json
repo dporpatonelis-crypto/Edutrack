@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["teacher", "student"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Scenario": {
+      "title": "Scenario",
+      "description": "An educational scenario containing multiple steps",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "backgroundImage": { "type": "string", "description": "URL for background image" },
+        "backgroundOpacity": { "type": "number", "description": "Opacity from 0 to 1" },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["web-app", "content", "quiz", "firebase-studio"] },
+              "title": { "type": "string" },
+              "content": { "type": "string", "description": "URL or text content" },
+              "layout": { "type": "string", "enum": ["full", "split"], "description": "Layout for the step" },
+              "order": { "type": "number" }
+            }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "teacherId", "steps"]
+    },
+    "Progress": {
+      "title": "Progress",
+      "description": "Tracking student progress in a scenario",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "scenarioId": { "type": "string" },
+        "completedSteps": { "type": "array", "items": { "type": "string" } },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "scenarioId"]
+    },
+    "ProfileContent": {
+      "title": "ProfileContent",
+      "description": "User profile content for About and Academic Work sections",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["about", "academic"] },
+        "content": { "type": "string" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "backgroundImage": { "type": "string" },
+        "backgroundOpacity": { "type": "number" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "type"]
+    },
+    "TabSettings": {
+      "title": "TabSettings",
+      "description": "Background settings for specific dashboard tabs",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "tabId": { "type": "string" },
+        "backgroundImage": { "type": "string" },
+        "backgroundOpacity": { "type": "number" }
+      },
+      "required": ["userId", "tabId"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles" },
+    "/scenarios/{scenarioId}": { "schema": "Scenario", "description": "Educational scenarios" },
+    "/progress/{progressId}": { "schema": "Progress", "description": "Student progress tracking" },
+    "/profile_content/{contentId}": { "schema": "ProfileContent", "description": "User profile content" },
+    "/tab_settings/{settingId}": { "schema": "TabSettings", "description": "Dashboard tab settings" }
+  }
+}
