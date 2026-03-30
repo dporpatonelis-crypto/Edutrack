@@ -1,8 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
-// @ts-ignore
-import firebaseConfig from '../firebase-applet-config.json';
+
+// Configuration is injected by Vite at build time from firebase-applet-config.json
+// or environment variables.
+const firebaseConfig = (process.env as any).FIREBASE_CONFIG || {};
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);

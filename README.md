@@ -1,20 +1,52 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# EduTrack - Educational Scenario Platform
 
-# Run and deploy your AI Studio app
+EduTrack is a platform for teachers to create educational scenarios, integrate web apps, and track student progress.
 
-This contains everything you need to run your app locally.
+## Features
+- Create and edit educational scenarios with multiple modules (content, web apps, quizzes).
+- Real-time student progress tracking.
+- Support for multiple languages (English, Greek).
+- Dark and Light mode support.
+- Customizable backgrounds for different sections.
 
-View your app in AI Studio: https://ai.studio/apps/2c4cfabe-2c01-429a-9bc4-ef4e188a106f
+## Tech Stack
+- **Frontend:** React, Vite, Tailwind CSS, Lucide React, Framer Motion.
+- **Backend:** Firebase (Firestore, Authentication).
 
-## Run Locally
+## Setup Instructions
 
-**Prerequisites:**  Node.js
+### 1. Firebase Configuration
+This project requires a Firebase project. You need to provide your Firebase configuration details.
 
+1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/).
+2. Enable **Firestore Database** and **Authentication** (Google Sign-In).
+3. Create a file named `firebase-applet-config.json` in the root directory (use `firebase-applet-config.json.example` as a template).
+4. Alternatively, you can set the following environment variables:
+   - `VITE_FIREBASE_API_KEY`
+   - `VITE_FIREBASE_AUTH_DOMAIN`
+   - `VITE_FIREBASE_PROJECT_ID`
+   - `VITE_FIREBASE_APP_ID`
+   - `VITE_FIREBASE_FIRESTORE_DATABASE_ID`
+   - `VITE_FIREBASE_STORAGE_BUCKET`
+   - `VITE_FIREBASE_MESSAGING_SENDER_ID`
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### 2. Environment Variables
+Copy `.env.example` to `.env` and fill in the required values.
+
+### 3. Installation
+```bash
+npm install
+```
+
+### 4. Development
+```bash
+npm run dev
+```
+
+### 5. Build
+```bash
+npm run build
+```
+
+## Security
+Sensitive configuration files like `firebase-applet-config.json` and `.env` are excluded from version control via `.gitignore`.
